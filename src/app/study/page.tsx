@@ -106,7 +106,7 @@ const WordCard = ({ id, ko, jp, memo, checked }: WordCardProps) => {
     <Card
       variant="elevated"
       height="300px"
-      width="400px"
+      width="70%"
       px={4}
       textAlign="center"
       boxShadow="lg"

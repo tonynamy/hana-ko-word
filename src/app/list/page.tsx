@@ -53,7 +53,7 @@ const useWordDeleteModal = (wordId: number) => {
         </ModalContent>
       </Modal>
     ),
-    []
+    [wordId, isOpen]
   );
   return [useRenderModal, onOpen, onClose] as const;
 };
@@ -101,7 +101,7 @@ const WordForm = () => {
 
 const WordRow = ({ word: { id, ko, jp, memo, checked } }: { word: Word }) => {
   const { checkWord } = useWordsContext();
-  const [renderModal, onOpen] = useWordDeleteModal(0);
+  const [renderModal, onOpen] = useWordDeleteModal(id);
   return (
     <Tr>
       <Td>{ko}</Td>
@@ -130,7 +130,7 @@ const WordRow = ({ word: { id, ko, jp, memo, checked } }: { word: Word }) => {
           <IconButton
             aria-label="delete"
             icon={<DeleteIcon />}
-            onClick={() => onOpen()}
+            onClick={onOpen}
           />
         </Flex>
       </Td>
