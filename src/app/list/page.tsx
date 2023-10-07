@@ -59,8 +59,8 @@ const useWordDeleteModal = (wordId: number) => {
 };
 
 const WordForm = () => {
-  const [ko_word, setKo] = useState("");
-  const [jp_word, setJp] = useState("");
+  const [ko, setKo] = useState("");
+  const [jp, setJp] = useState("");
   const [memo, setMemo] = useState("");
 
   const { doFetch } = useWordsContext();
@@ -68,17 +68,9 @@ const WordForm = () => {
   return (
     <FormControl>
       <FormLabel>KO</FormLabel>
-      <Input
-        type="text"
-        value={ko_word}
-        onChange={(e) => setKo(e.target.value)}
-      />
+      <Input type="text" value={ko} onChange={(e) => setKo(e.target.value)} />
       <FormLabel>JP</FormLabel>
-      <Input
-        type="text"
-        value={jp_word}
-        onChange={(e) => setJp(e.target.value)}
-      />
+      <Input type="text" value={jp} onChange={(e) => setJp(e.target.value)} />
       <FormLabel>MEMO</FormLabel>
       <Input
         type="text"
@@ -88,9 +80,9 @@ const WordForm = () => {
       <Button
         onClick={() => {
           axios
-            .post("http://127.0.0.1:8000/words/", {
-              ko_word,
-              jp_word,
+            .post("/api/words/", {
+              ko: ko,
+              jp: jp,
               memo,
             })
             .then(() => {
@@ -107,17 +99,13 @@ const WordForm = () => {
   );
 };
 
-const WordRow = ({
-  word: { id, ko_word, jp_word, memo, checked },
-}: {
-  word: Word;
-}) => {
+const WordRow = ({ word: { id, ko, jp, memo, checked } }: { word: Word }) => {
   const { checkWord } = useWordsContext();
   const [renderModal, onOpen] = useWordDeleteModal(0);
   return (
     <Tr>
-      <Td>{ko_word}</Td>
-      <Td>{jp_word}</Td>
+      <Td>{ko}</Td>
+      <Td>{jp}</Td>
       <Td isNumeric>{0}</Td>
       <Td isNumeric>{0}</Td>
       <Td>{memo}</Td>

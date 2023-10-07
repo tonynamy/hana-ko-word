@@ -3,8 +3,8 @@ import { ReactNode, createContext, useContext, useState } from "react";
 import { Fetch } from "react-request";
 
 export type Word = {
-  ko_word: string;
-  jp_word: string;
+  ko: string;
+  jp: string;
   memo: string;
   id: number;
   checked: boolean;
@@ -24,29 +24,27 @@ export const useWordsContext = () => useContext(WordsContext);
 
 export const WordsProvider = ({ children }: { children: ReactNode }) => {
   return (
-    <Fetch<Word[]> url="http://127.0.0.1:8000/words/">
+    <Fetch<Word[]> url="/api/words/">
       {({ fetching, failed, data, doFetch }) => (
         <WordsContext.Provider
           value={{
             words: data ?? [],
             checkWord(id, checked) {
               axios
-                .patch(`http://127.0.0.1:8000/words/${id}`, {
+                .patch(`/api/words/check/${id}`, {
                   checked,
                 })
                 .then(() => doFetch());
             },
             setMemo(id, memo) {
               axios
-                .patch(`http://127.0.0.1:8000/words/${id}`, {
+                .patch(`/api/words/memo/${id}`, {
                   memo,
                 })
                 .then(() => doFetch());
             },
             deleteWord(id) {
-              axios
-                .delete(`http://127.0.0.1:8000/words/${id}`)
-                .then(() => doFetch());
+              axios.delete(`/api/words/${id}`).then(() => doFetch());
             },
             doFetch,
           }}

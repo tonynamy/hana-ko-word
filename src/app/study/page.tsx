@@ -88,7 +88,7 @@ const Memo = ({ memo, editMemo, visibility }: MemoProps) => {
 
 type WordCardProps = Word;
 
-const WordCard = ({ id, ko_word, jp_word, memo, checked }: WordCardProps) => {
+const WordCard = ({ id, ko, jp, memo, checked }: WordCardProps) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
   const handleCardClick = () => {
@@ -106,6 +106,7 @@ const WordCard = ({ id, ko_word, jp_word, memo, checked }: WordCardProps) => {
     <Card
       variant="elevated"
       height="300px"
+      width="400px"
       px={4}
       textAlign="center"
       boxShadow="lg"
@@ -160,7 +161,7 @@ const WordCard = ({ id, ko_word, jp_word, memo, checked }: WordCardProps) => {
                   어려운 단어
                 </Badge>
               )}
-              <Heading size="lg">{ko_word}</Heading>
+              <Heading size="lg">{ko}</Heading>
               <Memo
                 memo={memo}
                 editMemo={(memo) => setMemo(id, memo)}
@@ -172,7 +173,7 @@ const WordCard = ({ id, ko_word, jp_word, memo, checked }: WordCardProps) => {
                 visibility={isFlipped ? "visible" : "hidden"}
                 gap={5}
               >
-                <Text decoration="gray">{jp_word}</Text>
+                <Text decoration="gray">{jp}</Text>
                 <Flex direction="row" gap={2} justifyContent="center">
                   <Button
                     onClick={(e) => {
