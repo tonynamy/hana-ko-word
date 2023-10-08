@@ -106,7 +106,6 @@ const WordCard = ({ id, ko, jp, memo, checked }: WordCardProps) => {
     <Card
       variant="elevated"
       height="300px"
-      width="70%"
       px={4}
       textAlign="center"
       boxShadow="lg"
@@ -248,7 +247,7 @@ const WordsSwiper = () => {
     <Swiper
       modules={[EffectCards]}
       direction="horizontal"
-      slidesPerView={1}
+      slidesPerView="auto"
       effect="cards"
       cardsEffect={{
         perSlideRotate: 2,
